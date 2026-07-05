@@ -1,0 +1,76 @@
+/* src/index.css
+   RiskLake design system — dark banking aesthetic with teal accent
+   Fonts: Inter (UI) + JetBrains Mono (data/code) */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Palette */
+  --bg-base:       #0d1117;
+  --bg-surface:    #161b22;
+  --bg-card:       #1c2330;
+  --bg-hover:      #21262d;
+  --border:        #30363d;
+  --border-light:  #21262d;
+
+  /* Accent — teal (trust / finance) */
+  --teal:          #1D9E75;
+  --teal-dim:      #145c45;
+  --teal-glow:     rgba(29,158,117,0.15);
+
+  /* Risk grade colours */
+  --grade-a:       #3fb950;
+  --grade-b:       #58a6ff;
+  --grade-c:       #e3b341;
+  --grade-d:       #f78166;
+  --grade-e:       #ff7b72;
+
+  /* Text */
+  --text-primary:   #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted:     #484f58;
+
+  /* Typography */
+  --font-ui:   "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Spacing */
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Utility */
+.mono  { font-family: var(--font-mono); }
+.muted { color: var(--text-secondary); }
+.grade-a { color: var(--grade-a); }
+.grade-b { color: var(--grade-b); }
+.grade-c { color: var(--grade-c); }
+.grade-d { color: var(--grade-d); }
+.grade-e { color: var(--grade-e); }
+
+/* Animations */
+@keyframes fadeIn  { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@keyframes pulse   { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+@keyframes spin    { to { transform: rotate(360deg); } }
+
+.fade-in   { animation: fadeIn .25s ease both; }
+.skeleton  { background: linear-gradient(90deg,var(--bg-card) 25%,var(--bg-hover) 50%,var(--bg-card) 75%);
+             background-size:200% 100%; animation: shimmer 1.4s infinite;
+             border-radius: var(--r-sm); }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }

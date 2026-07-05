@@ -1,0 +1,183 @@
+version: "3.9"
+
+# RiskLake — docker-compose.yml
+# One-command startup: docker compose up -d
+#
+# Services:
+#   postgres     — primary data store (Bronze audit, Silver features, Gold predictions)
+#   redis        — API response cache (PD scores TTL 1h, SHAP TTL 24h)
+#   airflow-init — one-shot DB init + admin user creation
+#   airflow-web  — Airflow webserver UI at http://localhost:8080
+#   airflow-sched— Airflow scheduler (runs DAGs)
+#   api          — FastAPI backend at http://localhost:8000
+#   frontend     — React + Vite dev server at http://localhost:5173
+
+x-airflow-common: &airflow-common
+  image: apache/airflow:2.9.1-python3.11
+  environment: &airflow-env
+    AIRFLOW__CORE__EXECUTOR:                    LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN:        postgresql+psycopg2://risklake:risklake@postgres:5432/risklake
+    AIRFLOW__CORE__DAGS_FOLDER:                 /opt/airflow/dags
+    AIRFLOW__CORE__LOAD_EXAMPLES:               "false"
+    AIRFLOW__WEBSERVER__SECRET_KEY:             risklake-dev-secret
+    # RiskLake env vars passed through to DAGs
+    RISKLAKE_ROOT:   /opt/airflow/risklake
+    PG_HOST:         postgres
+    PG_PORT:         "5432"
+    PG_DB:           risklake
+    PG_USER:         risklake
+    PG_PASSWORD:     risklake
+    REDIS_URL:       redis://redis:6379/0
+    GEMINI_API_KEY:  ${GEMINI_API_KEY:-}
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./data:/opt/airflow/risklake/data
+    - ./dbt:/opt/airflow/risklake/dbt
+    - ./ml:/opt/airflow/risklake/ml
+    - ./rag:/opt/airflow/risklake/rag
+    - airflow-logs:/opt/airflow/logs
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB:       risklake
+      POSTGRES_USER:     risklake
+      POSTGRES_PASSWORD: risklake
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test:     ["CMD-SHELL", "pg_isready -U risklake -d risklake"]
+      interval: 5s
+      timeout:  5s
+      retries:  10
+
+  # ── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test:     ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout:  3s
+      retries:  5
+
+  # ── Airflow init (one-shot) ────────────────────────────────────────────────
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        airflow db migrate
+        airflow users create \
+          --username admin --password admin \
+          --firstname Randeep --lastname Raj \
+          --role Admin --email randeep@risklake.dev
+    restart: "no"
+
+  # ── Airflow webserver ──────────────────────────────────────────────────────
+  airflow-web:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test:     ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout:  10s
+      retries:  10
+    restart: unless-stopped
+
+  # ── Airflow scheduler ──────────────────────────────────────────────────────
+  airflow-sched:
+    <<: *airflow-common
+    command: scheduler
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  # ── FastAPI backend ────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      PG_HOST:        postgres
+      PG_PORT:        "5432"
+      PG_DB:          risklake
+      PG_USER:        risklake
+      PG_PASSWORD:    risklake
+      REDIS_URL:      redis://redis:6379/0
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      RISKLAKE_ROOT:  /app
+    volumes:
+      - ./ml/models:/app/ml/models        # model artefacts
+      - ./rag/chroma_db:/app/rag/chroma_db # ChromaDB vector store
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:     ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout:  5s
+      retries:  5
+    restart: unless-stopped
+
+  # ── React frontend ─────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE: http://localhost:8000
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # ── Prometheus (metrics scrape) ────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+
+  # ── Grafana (dashboards) ───────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:10.4.0
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: risklake
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  airflow-logs:
+  grafana-data:

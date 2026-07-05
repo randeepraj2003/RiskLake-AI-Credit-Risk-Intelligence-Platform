@@ -1,0 +1,32 @@
+name: risklake
+version: "1.0.0"
+config-version: 2
+
+profile: risklake
+
+model-paths:   ["models"]
+test-paths:    ["tests"]
+macro-paths:   ["macros"]
+target-path:   "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  risklake:
+    bronze:
+      +schema:       bronze
+      +materialized: view        # Bronze = raw views, never transform in place
+
+    silver:
+      +schema:       silver
+      +materialized: table       # Silver = persisted clean tables
+      +tags:         ["silver"]
+
+    gold:
+      +schema:       gold
+      +materialized: table
+      +tags:         ["gold"]
+
+vars:
+  # Adjust these if your Bronze Parquet files are loaded into a separate schema
+  bronze_schema: "bronze"
+  silver_schema: "silver"

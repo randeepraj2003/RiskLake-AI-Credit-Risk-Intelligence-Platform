@@ -1,0 +1,62 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: bronze
+    description: >
+      Raw ingestion layer — Parquet files loaded into PostgreSQL by the
+      Airflow bronze_ingest DAG. No transforms occur here; data is landed
+      exactly as received from source systems.
+    tables:
+
+      - name: loan_applications
+        description: Raw loan application records from the origination system.
+        columns:
+          - name: application_id
+            description: Unique application identifier.
+            tests: [unique, not_null]
+          - name: customer_id
+            tests: [not_null]
+          - name: loan_amount_inr
+            tests: [not_null]
+          - name: annual_income_inr
+            tests: [not_null]
+          - name: credit_score
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 300
+                  max_value: 900
+          - name: default_flag
+            tests:
+              - accepted_values:
+                  values: [0, 1]
+
+      - name: credit_bureau
+        description: Credit bureau pull data — one row per customer per pull date.
+        columns:
+          - name: customer_id
+            tests: [not_null]
+          - name: credit_utilisation_pct
+            tests:
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  max_value: 1
+          - name: credit_score
+            tests: [not_null]
+
+      - name: transactions
+        description: Customer transaction history for the last 12 months.
+        columns:
+          - name: transaction_id
+            tests: [unique, not_null]
+          - name: customer_id
+            tests: [not_null]
+          - name: amount_inr
+            tests: [not_null]
+
+      - name: macro_indicators
+        description: Daily macroeconomic indicators (RBI repo rate, CPI, etc).
+        columns:
+          - name: date
+            tests: [unique, not_null]

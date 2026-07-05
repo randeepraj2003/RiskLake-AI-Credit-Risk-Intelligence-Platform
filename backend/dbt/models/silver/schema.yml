@@ -1,0 +1,121 @@
+version: 2
+
+models:
+
+  # ── stg_loans ────────────────────────────────────────────────────────────
+  - name: stg_loans
+    description: >
+      Cleaned and standardised loan application records. Canonical Silver
+      source for all downstream feature models and Gold risk tables.
+      One row per loan application.
+    columns:
+      - name: application_id
+        description: Unique loan application identifier.
+        tests: [unique, not_null]
+      - name: customer_id
+        tests: [not_null]
+      - name: application_date
+        tests: [not_null]
+      - name: loan_amount_inr
+        tests: [not_null]
+      - name: annual_income_inr
+        description: Annual income in Indian Rupees. Always > 0 (filtered in model).
+        tests: [not_null]
+      - name: loan_to_income_ratio
+        description: loan_amount / annual_income. Core LTI risk signal.
+      - name: credit_risk_tier
+        tests:
+          - accepted_values:
+              values: ['low', 'medium', 'high', 'very_high']
+      - name: employment_type
+        tests:
+          - accepted_values:
+              values: ['salaried', 'self_employed', 'contract', 'unemployed']
+      - name: default_flag
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: silver_processed_at
+        tests: [not_null]
+
+  # ── stg_credit ────────────────────────────────────────────────────────────
+  - name: stg_credit
+    description: >
+      Cleaned credit bureau pull data. One row per customer (most recent pull).
+      Adds derived signals: utilisation band, inquiry velocity flag,
+      delinquency rate, credit age band.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: credit_utilisation_pct
+        description: Clamped to [0, 1].
+        tests: [not_null]
+      - name: utilisation_band
+        tests:
+          - accepted_values:
+              values: ['low', 'medium', 'high', 'maxed_out']
+      - name: high_inquiry_flag
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: credit_age_band
+        tests:
+          - accepted_values:
+              values: ['new', 'developing', 'established', 'mature']
+      - name: silver_processed_at
+        tests: [not_null]
+
+  # ── feat_dti_ratio ────────────────────────────────────────────────────────
+  - name: feat_dti_ratio
+    description: >
+      Debt-to-Income ratio feature table. Joins stg_loans + stg_credit and
+      computes monthly debt obligations vs income. Primary feature input for
+      the Gold PD model. One row per loan application.
+    columns:
+      - name: application_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests: [not_null]
+      - name: dti_ratio
+        description: >
+          Total estimated monthly debt / monthly income.
+          Null when income data is missing.
+      - name: dti_risk_tier
+        tests:
+          - accepted_values:
+              values: ['low', 'moderate', 'elevated', 'high', 'unknown']
+      - name: combined_risk_flag
+        description: 1 when DTI >= 0.50 AND high inquiry flag is set.
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: feature_computed_at
+        tests: [not_null]
+
+  # ── feat_credit_util ──────────────────────────────────────────────────────
+  - name: feat_credit_util
+    description: >
+      Credit utilisation feature set combining bureau snapshot data with
+      12-month transaction behavioural signals. Produces spend velocity,
+      EMI regularity, balance trend, and a composite credit stress score.
+      One row per customer.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: emi_regularity_score
+        description: Fraction of months (0–1) in which >=1 EMI payment was made.
+      - name: credit_stress_score
+        description: >
+          Additive score 0–4: high_inquiry + balance_trend + low_emi_regularity
+          + high_flagged_txn_rate. Used by AI credit analyst for narrative.
+      - name: utilisation_change_flag
+        description: 1 if transaction-implied utilisation exceeds bureau by >15%.
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: balance_trend_flag
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: feature_computed_at
+        tests: [not_null]

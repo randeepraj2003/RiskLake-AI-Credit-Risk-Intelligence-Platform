@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Environment
+.env
+*.env.local
+
+# Data — raw files and generated data are not committed
+data/raw/
+data/bronze/
+data/processed/
+
+# ML artefacts
+ml/models/*.pkl
+ml/models/model_metadata.json
+ml/reports/
+
+# ChromaDB vector store (rebuilt by ingest_docs.py)
+rag/chroma_db/
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Airflow
+airflow/logs/
+airflow.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

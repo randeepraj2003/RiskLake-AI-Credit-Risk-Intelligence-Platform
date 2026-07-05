@@ -1,0 +1,59 @@
+BASEL III FRAMEWORK — CREDIT RISK CAPITAL REQUIREMENTS
+Source: Bank for International Settlements, Basel Committee on Banking Supervision
+
+SECTION 1: PROBABILITY OF DEFAULT (PD)
+========================================
+The Probability of Default (PD) represents the likelihood that a borrower
+will default within a one-year horizon. Under the Internal Ratings-Based (IRB)
+approach, banks must estimate PD for each exposure:
+
+PD Risk Grade Classification:
+- Grade A (PD < 5%):  Minimal risk. Standard pricing applies.
+- Grade B (PD 5-15%): Low-moderate risk. Risk-adjusted pricing required.
+- Grade C (PD 15-30%): Moderate risk. Enhanced monitoring and higher provisions.
+- Grade D (PD 30-50%): High risk. Loan loss provisions at 40-60%.
+- Grade E (PD > 50%): Very high risk. Full provision recommended; consider declining.
+
+SECTION 2: LOSS GIVEN DEFAULT (LGD)
+======================================
+LGD is the fraction of the exposure that will be lost if the borrower defaults.
+- Secured loans (real estate): LGD typically 20-40%
+- Secured loans (other collateral): LGD typically 40-60%
+- Unsecured loans: LGD typically 60-85%
+
+SECTION 3: RISK-WEIGHTED ASSETS (RWA)
+=======================================
+Credit RWA = Exposure at Default (EAD) × Risk Weight
+Risk weights under the standardised approach:
+- Claims rated AAA to AA-: 20% risk weight
+- Claims rated A+ to A-: 50% risk weight
+- Claims rated BBB+ to BB-: 100% risk weight
+- Claims rated below BB-: 150% risk weight
+- Unrated claims: 100% risk weight
+
+SECTION 4: KEY RISK INDICATORS FOR EARLY WARNING
+==================================================
+Banks should monitor the following early warning indicators (EWIs):
+1. Credit utilisation increase of more than 20% in 90 days
+2. Three or more hard credit inquiries within 6 months
+3. Delinquency rate exceeding 10% of total accounts
+4. EMI payment regularity score below 0.5 (payments made in fewer than half of months)
+5. Debt-to-income ratio increase of more than 10 percentage points in 12 months
+6. Negative balance trend: average balance declining for 3+ consecutive months
+7. Flagged transaction rate exceeding 5% of total monthly transactions
+
+SECTION 5: CREDIT STRESS SCORING
+===================================
+A composite credit stress score is recommended for rapid risk assessment.
+Score components (each contributes 1 point to a 0-4 scale):
+- High inquiry flag (>=3 hard pulls in 6 months): +1
+- Balance trend flag (balance growing month-over-month): +1
+- Low EMI regularity (<50% of months with payment): +1
+- High flagged transaction rate (>5%): +1
+
+Stress score interpretation:
+- Score 0: No stress indicators. Standard approval process.
+- Score 1: Minor stress. Proceed with standard enhanced due diligence.
+- Score 2: Moderate stress. Senior credit officer review required.
+- Score 3: High stress. Decline recommended unless exceptional circumstances.
+- Score 4: Severe stress. Automatic decline.

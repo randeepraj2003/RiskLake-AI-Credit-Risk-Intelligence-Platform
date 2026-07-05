@@ -1,0 +1,60 @@
+RISKLAKE CREDIT RISK GUIDELINES — DOCUMENT 1
+RBI Master Circular: Prudential Norms on Income Recognition, Asset Classification and Provisioning
+Version: 2024-01 | Source: Reserve Bank of India
+
+SECTION 1: DEBT-TO-INCOME RATIO THRESHOLDS
+
+1.1 Standard Norms
+The Reserve Bank of India recommends that retail lenders maintain the following Debt-to-Income (DTI) thresholds for new loan originations:
+
+- DTI below 36%: LOW RISK — Loan may be approved under standard terms.
+- DTI between 36% and 43%: MODERATE RISK — Loan may be approved with enhanced documentation and income verification.
+- DTI between 43% and 50%: ELEVATED RISK — Loan requires senior credit officer approval and additional collateral assessment.
+- DTI above 50%: HIGH RISK — Loan should generally be declined unless exceptional mitigating factors exist (e.g., high collateral coverage ratio above 2.0, perfect repayment history exceeding 5 years).
+
+1.2 Employment Type Adjustments
+- Salaried employees: Standard DTI thresholds apply as above.
+- Self-employed individuals: DTI thresholds are reduced by 5 percentage points due to income volatility.
+- Contract workers: DTI thresholds are reduced by 3 percentage points.
+- Unemployed applicants: Applications should not be approved unless co-applicant income is sufficient.
+
+1.3 Loan Purpose Adjustments
+- Home purchase loans: DTI threshold may be relaxed by up to 5% due to asset-backed nature.
+- Business loans: Assessed on business cash flow, not personal DTI alone.
+- Personal loans: Strictest DTI thresholds apply — no relaxation permitted.
+
+SECTION 2: CREDIT SCORE REQUIREMENTS
+
+2.1 Minimum Credit Score Thresholds
+- Credit score >= 750: Prime borrower. Eligible for all loan products.
+- Credit score 700-749: Near-prime. Standard loan products with regular interest rates.
+- Credit score 650-699: Sub-prime. Higher interest rates, mandatory credit counselling.
+- Credit score 600-649: Deep sub-prime. Loan amount capped at 2x annual income. Requires guarantor.
+- Credit score below 600: Generally declined. Refer to secured loan products only.
+
+2.2 Hard Inquiry Policy
+- 1-2 hard inquiries in 6 months: Acceptable.
+- 3-4 hard inquiries in 6 months: Flag for manual review. May indicate credit shopping or financial distress.
+- 5+ hard inquiries in 6 months: Automatic decline recommended unless documented explanation provided.
+
+SECTION 3: COLLATERAL ASSESSMENT
+
+3.1 Collateral Coverage Ratio (CCR)
+Collateral Coverage Ratio = Collateral Value / Loan Amount
+
+- CCR >= 2.0: Strong collateral. Can offset elevated DTI or borderline credit score by one tier.
+- CCR 1.5 to 1.99: Adequate collateral. Standard risk treatment.
+- CCR 1.0 to 1.49: Marginal collateral. No risk offset permitted.
+- CCR below 1.0: Undercollateralised. Additional guarantors or co-applicants required.
+
+SECTION 4: DELINQUENCY AND DEFAULT HISTORY
+
+4.1 Delinquency Rate
+- Delinquency rate 0%: No adverse history. Full credit eligibility.
+- Delinquency rate 1-5%: Minor delinquency. Acceptable with explanation letter.
+- Delinquency rate 6-15%: Significant delinquency. Mandatory 12-month clean repayment proof required.
+- Delinquency rate above 15%: High delinquency. Loan decline recommended.
+
+4.2 Prior Default
+- Single default resolved > 3 years ago: May proceed with elevated interest rate.
+- Multiple defaults or default within 3 years: Automatic decline.

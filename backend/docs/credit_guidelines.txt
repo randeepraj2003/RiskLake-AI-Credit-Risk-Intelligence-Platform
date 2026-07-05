@@ -1,0 +1,159 @@
+
+RiskLake Credit Risk Guidelines — Internal Reference Document
+Version 2.1 | Effective: January 2024
+
+=======================================================================
+SECTION 1: LOAN ELIGIBILITY CRITERIA
+=======================================================================
+
+1.1 Minimum Credit Score Requirements
+--------------------------------------
+- Grade A loans (Low Risk):     Credit score >= 750
+- Grade B loans (Medium Risk):  Credit score 650–749
+- Grade C loans (Elevated Risk):Credit score 550–649
+- Grade D/E loans (High Risk):  Credit score < 550 — requires senior approval
+
+Loans with credit scores below 500 are automatically declined unless
+collateral coverage ratio exceeds 2.0.
+
+1.2 Debt-to-Income (DTI) Ratio Thresholds
+-------------------------------------------
+The DTI ratio is the primary gating criterion for loan approval:
+
+- DTI < 0.36  : Low risk — standard approval process
+- DTI 0.36–0.43: Moderate — requires additional income verification
+- DTI 0.43–0.50: Elevated — requires manager sign-off
+- DTI > 0.50  : High risk — automatic flag for credit committee review
+
+RBI circular RBI/2023-24/56 mandates that all retail lenders cap
+gross DTI at 0.55 for personal and home loans.
+
+1.3 Loan-to-Income (LTI) Ratio
+--------------------------------
+- LTI <= 3.0  : Standard approval
+- LTI 3.0–5.0 : Requires documented income proof
+- LTI > 5.0   : Referred to credit committee; rarely approved
+
+1.4 Employment Type Adjustments
+---------------------------------
+- Salaried (government/PSU): No additional risk premium
+- Salaried (private):        +0.5% rate premium if < 2 years at employer
+- Self-employed:             Income averaged over 3 ITR filings required
+- Contract workers:          LTI capped at 3.0; DTI limit tightened to 0.40
+- Unemployed:                Only eligible for secured loans with LTV < 0.5
+
+=======================================================================
+SECTION 2: CREDIT BUREAU INTERPRETATION
+=======================================================================
+
+2.1 Hard Inquiry Thresholds
+-----------------------------
+Hard inquiries in the last 6 months signal credit-hungry behaviour:
+- 0–2 inquiries: Normal
+- 3–5 inquiries: Elevated — add 0.25% to interest rate
+- 6+  inquiries: High risk — refer to credit committee
+
+2.2 Credit Utilisation Interpretation
+---------------------------------------
+- < 30%  : Healthy — borrower manages credit well
+- 30–60% : Moderate — monitor for trend
+- 60–90% : Stressed — requires income re-verification
+- > 90%  : Maxed out — strong default indicator; cap loan at 50% of requested
+
+2.3 Delinquency History
+------------------------
+- 0 delinquent accounts    : Clean history
+- 1–2 delinquent accounts  : Minor concern; require explanation letter
+- 3+  delinquent accounts  : Major red flag; automatic escalation to committee
+- Any account 90+ DPD (Days Past Due) in last 24 months: Application declined
+
+2.4 Credit Age
+---------------
+Borrowers with credit history under 12 months are treated as thin-file
+customers. Thin-file policy:
+- Require 2 additional identity/income documents
+- Cap LTI at 2.5
+- Apply 10% additional haircut to collateral valuation
+
+=======================================================================
+SECTION 3: TRANSACTION BEHAVIOUR SIGNALS
+=======================================================================
+
+3.1 EMI Payment Regularity
+----------------------------
+EMI regularity score (fraction of months with on-time EMI payment):
+- Score >= 0.90 : Excellent — positive signal in PD model
+- Score 0.70–0.89: Acceptable
+- Score 0.50–0.69: Concerning — request 6-month bank statement
+- Score < 0.50  : High risk — likely existing debt stress
+
+3.2 Flagged Transaction Rate
+-----------------------------
+Transactions flagged by the AML/fraud engine:
+- Rate < 1%   : Normal
+- Rate 1–5%   : Monitor — no action required
+- Rate > 5%   : Refer to compliance team before loan approval
+
+3.3 Balance Trend Analysis
+---------------------------
+A declining average balance over the last 3 months vs prior 9 months
+is a negative signal. If balance_trend_flag = 1 (recent balance lower
+than historical average), treat as an additional risk indicator and
+request salary slip for the last 3 months.
+
+=======================================================================
+SECTION 4: RISK GRADE DEFINITIONS (BASEL II ALIGNED)
+=======================================================================
+
+Risk Grade | PD Range    | Action
+-----------|-------------|------------------------------------------
+A          | 0% – 5%     | Approve; standard rate
+B          | 5% – 15%    | Approve; +0.25% rate premium
+C          | 15% – 30%   | Approve with conditions; +0.75% premium
+D          | 30% – 50%   | Senior approval required; +1.5% premium
+E          | > 50%       | Credit committee review; collateral required
+
+=======================================================================
+SECTION 5: ESCALATION AND OVERRIDE POLICY
+=======================================================================
+
+5.1 Automatic Escalations
+---------------------------
+The following conditions trigger automatic credit committee escalation:
+- PD probability > 0.50 (Risk Grade E)
+- DTI > 0.55
+- 3+ delinquent accounts
+- Any 90+ DPD in last 24 months
+- Loan amount > INR 50,00,000 (5 crore)
+- Combined risk flag = 1 (high DTI + high inquiry simultaneously)
+
+5.2 Manual Override Rules
+--------------------------
+A credit officer may override a system decline if:
+- Collateral coverage ratio > 2.0 AND credit score > 650
+- Employer is a PSU/government entity AND DTI < 0.55
+- Existing customer with 5+ year relationship AND clean history
+
+All manual overrides must be documented with rationale and countersigned
+by a second credit officer.
+
+=======================================================================
+SECTION 6: MACRO ECONOMIC ADJUSTMENTS
+=======================================================================
+
+6.1 RBI Repo Rate Sensitivity
+-------------------------------
+When RBI repo rate exceeds 7.0%:
+- Tighten DTI threshold by 0.05 (e.g., 0.50 → 0.45 for elevated tier)
+- Cap variable rate loans at LTI 4.0
+
+6.2 CPI Inflation Adjustment
+------------------------------
+When CPI > 6.0%:
+- Apply 15% haircut to self-employed income declarations
+- Require updated income proof if application is > 60 days old
+
+6.3 GDP and Unemployment Sensitivity
+--------------------------------------
+- GDP growth < 5%: Increase base PD by 5% across all risk grades
+- Unemployment > 8%: Restrict unsecured personal loans to Grade A/B only

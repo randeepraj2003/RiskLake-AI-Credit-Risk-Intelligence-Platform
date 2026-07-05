@@ -1,0 +1,11 @@
+BASEL III CREDIT RISK FRAMEWORK
+
+Grade A PD below 5 percent: Minimal risk standard pricing.
+Grade B PD 5 to 15 percent: Low moderate risk adjusted pricing.
+Grade C PD 15 to 30 percent: Moderate risk enhanced monitoring.
+Grade D PD 30 to 50 percent: High risk higher provisions.
+Grade E PD above 50 percent: Very high risk full provision.
+
+Early warning: Three hard inquiries in 6 months is high risk.
+EMI regularity below 0.5 is stress indicator.
+Credit stress score 3 or above means decline recommended.

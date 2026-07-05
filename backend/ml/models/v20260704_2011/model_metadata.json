@@ -1,0 +1,10 @@
+{
+  "model_version": "v20260704_2011",
+  "trained_at": "2026-07-04T20:11:30.846323",
+  "rf_auc": 0.9999,
+  "lr_auc": 0.9739,
+  "ensemble_auc": 0.9993,
+  "avg_precision": 0.9994,
+  "feature_count": 22,
+  "status": "candidate"
+}

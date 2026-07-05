@@ -1,0 +1,52 @@
+RBI MASTER CIRCULAR — CREDIT RISK MANAGEMENT
+Source: Reserve Bank of India, Prudential Norms on Income Recognition
+
+SECTION 1: CLASSIFICATION OF LOAN ASSETS
+==========================================
+Banks shall classify their loan assets into the following categories:
+- Standard Assets: Accounts which do not disclose any problems.
+- Sub-Standard Assets: Accounts which have remained NPA for less than 12 months.
+- Doubtful Assets: Accounts which have remained in the sub-standard category for 12 months.
+- Loss Assets: Accounts where loss has been identified by the bank or internal/external auditors.
+
+SECTION 2: INCOME RECOGNITION
+==============================
+Banks should not recognise interest income on a cash basis in respect of:
+- Non-Performing Assets (NPAs)
+- Any advances where interest has not been received for more than 90 days
+
+SECTION 3: PROVISIONING NORMS
+==============================
+Standard Assets: General provision of 0.25% to 1% based on category.
+Sub-standard Assets: 15% of the outstanding loan balance.
+Doubtful Assets (up to 1 year): 25% of outstanding balance.
+Doubtful Assets (1-3 years): 40% of outstanding balance.
+Doubtful Assets (more than 3 years): 100% of outstanding balance.
+Loss Assets: 100% provision required immediately.
+
+SECTION 4: DEBT-TO-INCOME RATIO THRESHOLDS
+============================================
+Banks are advised to adhere to the following DTI norms for retail lending:
+- DTI below 0.36 (36%): Low risk. Loans may be approved under standard terms.
+- DTI between 0.36 and 0.43 (36-43%): Moderate risk. Enhanced scrutiny required.
+- DTI between 0.43 and 0.50 (43-50%): Elevated risk. Senior credit officer approval needed.
+- DTI above 0.50 (50%): High risk. Applications should generally be declined unless
+  strong mitigating factors exist such as high collateral value or guarantor support.
+
+SECTION 5: CREDIT SCORE REQUIREMENTS
+======================================
+For retail and personal loans, the following minimum credit score thresholds apply:
+- Home loans: Minimum CIBIL score of 700 recommended.
+- Personal loans (unsecured): Minimum CIBIL score of 650 recommended.
+- Auto loans: Minimum CIBIL score of 620 recommended.
+- Credit cards: Minimum CIBIL score of 650 recommended.
+Applicants with credit scores below 550 are classified as high-risk and
+require additional collateral or guarantor support.
+
+SECTION 6: COLLATERAL REQUIREMENTS
+=====================================
+Secured lending requires collateral coverage ratio (CCR) of:
+- Home loans: CCR >= 1.20 (collateral value at least 120% of loan amount)
+- Business loans: CCR >= 1.50
+- Personal loans: Unsecured; no CCR requirement but stricter income verification
+Collateral must be independently valued by RBI-approved valuers.

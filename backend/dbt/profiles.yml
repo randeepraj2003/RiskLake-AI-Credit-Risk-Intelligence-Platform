@@ -1,0 +1,25 @@
+# Place this file at ~/.dbt/profiles.yml  (NOT inside the dbt project folder)
+# or set DBT_PROFILES_DIR env var to point here.
+
+risklake:
+  target: dev
+  outputs:
+    dev:
+      type:     postgres
+      host:     "{{ env_var('PG_HOST', 'localhost') }}"
+      port:     "{{ env_var('PG_PORT', '5432') | int }}"
+      dbname:   "{{ env_var('PG_DB',   'risklake') }}"
+      user:     "{{ env_var('PG_USER', 'risklake') }}"
+      password: "{{ env_var('PG_PASSWORD', 'risklake') }}"
+      schema:   silver
+      threads:  4
+
+    prod:
+      type:     postgres
+      host:     "{{ env_var('PG_HOST') }}"
+      port:     "{{ env_var('PG_PORT') | int }}"
+      dbname:   "{{ env_var('PG_DB') }}"
+      user:     "{{ env_var('PG_USER') }}"
+      password: "{{ env_var('PG_PASSWORD') }}"
+      schema:   silver
+      threads:  8

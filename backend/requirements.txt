@@ -1,0 +1,34 @@
+# RiskLake — ML layer dependencies
+# Install with: pip install -r requirements.txt
+
+# Core data
+pandas==2.2.2
+numpy==1.26.4
+pyarrow==16.0.0          # Parquet read/write
+
+# ML
+scikit-learn==1.5.0
+shap==0.45.1
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# Database
+psycopg2-binary==2.9.9
+
+# Airflow (install separately via pip install apache-airflow[postgres])
+# apache-airflow==2.9.1
+# apache-airflow-providers-postgres==5.10.2
+
+# dbt
+dbt-core==1.8.3
+dbt-postgres==1.8.2
+
+# API (Week 5)
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+redis==5.0.6
+
+# RAG (Week 4)
+chromadb==0.5.0
+sentence-transformers==3.0.1
+google-generativeai==0.7.2

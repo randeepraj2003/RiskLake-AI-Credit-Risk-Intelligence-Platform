@@ -1,0 +1,107 @@
+RISKLAKE CREDIT RISK GUIDELINES — DOCUMENT 2
+Basel II / III Retail Credit Risk Framework — Internal Implementation Guide
+Version: 2024-02 | Source: RiskLake Internal Risk Management
+
+SECTION 1: PROBABILITY OF DEFAULT (PD) INTERPRETATION
+
+1.1 Risk Grade Definitions
+RiskLake uses a five-grade PD model aligned with Basel II IRB (Internal Ratings-Based) approach:
+
+Grade A — PD < 5%
+  Interpretation: Very low default risk. Borrower demonstrates strong debt serviceability.
+  Policy action: Approve at standard rate. No additional conditions required.
+
+Grade B — PD 5% to 14.99%
+  Interpretation: Low default risk. Borrower is creditworthy with minor risk signals.
+  Policy action: Approve at standard or slightly elevated rate. Quarterly monitoring.
+
+Grade C — PD 15% to 29.99%
+  Interpretation: Moderate default risk. One or more risk signals present.
+  Policy action: Approve with conditions — collateral verification, income proof, semi-annual review.
+  Typical triggers: Elevated DTI, moderate credit utilisation, borderline credit score.
+
+Grade D — PD 30% to 49.99%
+  Interpretation: High default risk. Multiple risk signals present.
+  Policy action: Senior credit officer review required. Reduced loan amount or enhanced collateral.
+  Typical triggers: DTI above 43%, high credit utilisation, delinquency history, irregular EMI payments.
+
+Grade E — PD >= 50%
+  Interpretation: Very high default risk. Borrower unlikely to service debt.
+  Policy action: Decline or refer to secured loan product with 200% collateral coverage.
+
+1.2 Model Confidence and SHAP Interpretation
+SHAP (SHapley Additive exPlanations) values indicate the contribution of each feature to the model's PD prediction relative to the average prediction (base rate).
+
+- Positive SHAP value: Feature pushes PD probability ABOVE the population average (increases default risk).
+- Negative SHAP value: Feature pulls PD probability BELOW the population average (decreases default risk).
+- SHAP magnitude: Larger absolute values indicate stronger feature influence.
+
+Key features and their typical SHAP interpretation:
+- dti_ratio (positive SHAP): High debt burden relative to income. Primary driver of default in retail credit.
+- credit_stress_score (positive SHAP): Composite of inquiry velocity, balance trend, EMI irregularity. Strong behavioural signal.
+- emi_regularity_score (negative SHAP): Consistent EMI payment history is the strongest protective factor.
+- bureau_utilisation_pct (positive SHAP): High credit card utilisation indicates financial stress.
+- collateral_coverage_ratio (negative SHAP): Strong collateral reduces expected loss even if default occurs.
+- delinquency_rate (positive SHAP): History of missed payments is a significant predictor of future default.
+
+SECTION 2: CREDIT UTILISATION RISK SIGNALS
+
+2.1 Utilisation Thresholds
+- Utilisation < 30%: Healthy credit management. No risk adjustment.
+- Utilisation 30-60%: Moderate utilisation. Monitor for upward trend.
+- Utilisation 60-90%: High utilisation. Indicative of credit dependency. Apply risk premium.
+- Utilisation > 90% (maxed_out): Severe financial stress signal. Requires explanation and decline consideration.
+
+2.2 Utilisation Trend vs Bureau Snapshot
+If the transaction-derived utilisation estimate exceeds the bureau snapshot by more than 15 percentage points (utilisation_change_flag = 1), this may indicate:
+  a) The bureau data is stale and actual utilisation has increased since last pull.
+  b) The customer has recently taken on new credit not yet reflected in the bureau.
+  c) A seasonal spend spike unrelated to chronic financial stress.
+Action: Manual review recommended. Request updated bureau pull before final decision.
+
+2.3 EMI Regularity Score
+- Score >= 0.9: Excellent repayment discipline. Strongest protective SHAP signal.
+- Score 0.7-0.89: Good repayment. Minor gaps acceptable with documentation.
+- Score 0.5-0.69: Moderate irregularity. Investigate cause before approval.
+- Score < 0.5: Poor repayment discipline. High correlation with future default. Decline or secure.
+
+SECTION 3: BEHAVIOURAL RISK SIGNALS FROM TRANSACTIONS
+
+3.1 Credit Stress Score Interpretation
+The credit_stress_score (0-4) is an additive composite of four binary flags:
+  +1 if high_inquiry_flag = 1     (3+ hard inquiries in 6 months)
+  +1 if balance_trend_flag = 1    (recent 3-month balance > earlier 9-month balance)
+  +1 if emi_regularity_score < 0.5 (poor EMI payment discipline)
+  +1 if flagged_txn_rate > 5%     (>5% of transactions flagged as suspicious)
+
+Score interpretation:
+  0: No stress signals. Proceed normally.
+  1: Minor stress. Note in file. Standard approval process.
+  2: Moderate stress. Require documentation of each flag. Semi-annual review.
+  3: High stress. Senior credit officer approval. Reduced loan amount.
+  4: Critical stress. Decline unless exceptional compensating factors.
+
+3.2 Flagged Transaction Rate
+- Rate 0-2%: Normal. No action.
+- Rate 2-5%: Monitor. Request statement explanation if rate is recent.
+- Rate > 5%: Flag for compliance review. Potential AML concern. Do not approve until cleared.
+
+SECTION 4: COMPENSATING FACTORS
+
+When a borrower presents borderline risk signals, the following compensating factors may allow approval:
+
+4.1 Strong Compensating Factors (can offset one full risk tier)
+- Collateral coverage ratio >= 2.0
+- EMI regularity score >= 0.95 over 24+ months
+- Credit score >= 800 with credit history > 10 years
+- Loan-to-income ratio <= 1.0
+
+4.2 Moderate Compensating Factors (can offset within a tier)
+- Long-standing customer relationship (> 5 years)
+- Salary credited directly to bank account for > 2 years
+- Co-applicant with clean credit history and independent income
+
+4.3 Factors That Cannot Be Offset
+- Active default in the last 12 months
+- Ongoing legal proceedings related to debt
+- Flagged transaction rate > 10% without AML clearance

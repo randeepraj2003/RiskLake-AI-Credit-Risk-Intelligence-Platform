@@ -1,0 +1,41 @@
+FATF — AML/CFT RISK TYPOLOGIES FOR RETAIL BANKING
+Source: Financial Action Task Force, Guidance for Retail Banking Sector
+
+SECTION 1: TRANSACTION MONITORING RED FLAGS
+============================================
+The following transaction patterns should trigger enhanced due diligence (EDD):
+
+High-Risk Transaction Indicators:
+1. Large cash deposits or withdrawals inconsistent with customer profile
+2. Rapid movement of funds through multiple accounts (layering)
+3. Transactions involving high-risk jurisdictions
+4. Multiple small transactions just below reporting thresholds (structuring)
+5. Transactions inconsistent with stated business or income source
+6. Sudden increase in transaction frequency or volume without explanation
+
+Customer Risk Indicators:
+1. Politically Exposed Persons (PEPs) or close associates
+2. Customers operating in high-risk industries (cash-intensive businesses)
+3. Customers with unexplained wealth or income inconsistent with lifestyle
+4. Multiple address changes or inconsistent personal information
+
+SECTION 2: SUSPICIOUS ACTIVITY REPORTING (SAR)
+================================================
+A Suspicious Activity Report (SAR) must be filed when:
+- A transaction of INR 10 lakh or more in cash is conducted
+- Multiple transactions totalling INR 10 lakh or more are conducted in a month
+- Any transaction appears to be structured to avoid reporting thresholds
+- Transactions involve suspected proceeds of crime
+
+SECTION 3: CREDIT RISK AND MONEY LAUNDERING NEXUS
+===================================================
+Loan facilities can be misused for money laundering:
+1. Loan-Back Schemes: Criminal deposits funds as collateral, takes loan against it,
+   defaults, and the institution retains the 'clean' collateral.
+2. Trade Finance Abuse: Over/under-invoicing of goods to move value across borders.
+3. Mortgage Fraud: Property purchased with illicit funds through complex ownership.
+
+Risk mitigation:
+- Enhanced CDD for loan amounts above INR 50 lakh
+- Verify income source documentation for DTI calculation
+- Cross-reference collateral ownership with beneficial ownership registry

@@ -1,0 +1,8 @@
+RBI CREDIT RISK GUIDELINES
+
+DTI below 0.36: Low risk approved.
+DTI 0.36 to 0.43: Moderate risk enhanced scrutiny.
+DTI 0.43 to 0.50: Elevated risk senior approval needed.
+DTI above 0.50: High risk generally declined.
+Credit score below 550: High risk additional collateral required.
+Home loans minimum score 700. Personal loans minimum 650.
