@@ -45,3 +45,9 @@ airflow.db
 # OS
 .DS_Store
 Thumbs.db
+
+set_env.bat
+
+backend/dbt/profiles.yml
+
+backend/airflow_home/webserver_config.py
