@@ -21,7 +21,7 @@ PG_CONN = {
     "host":     os.environ.get("PG_HOST", "localhost"),
     "dbname":   os.environ.get("PG_DB",   "risklake"),
     "user":     os.environ.get("PG_USER", "postgres"),
-    "password": os.environ.get("PG_PASSWORD", "risklake"),
+    "password": os.environ.get("PG_PASSWORD"),
 }
 
 def get_conn():

@@ -27,7 +27,7 @@ PG_CONN = {
     "host":     os.environ.get("PG_HOST",     "localhost"),
     "dbname":   os.environ.get("PG_DB",       "risklake"),
     "user":     os.environ.get("PG_USER",     "postgres"),
-    "password": os.environ.get("PG_PASSWORD", "risklake"),
+    "password": os.environ.get("PG_PASSWORD"),
 }
 NUM_COLS = ["annual_income_inr","loan_amount_inr","loan_term_months","credit_score",
             "loan_to_income_ratio","collateral_coverage_ratio","bureau_utilisation_pct",

@@ -1,4 +1,5 @@
 @echo off
+call set_env.bat
 REM RiskLake — Airflow Setup Script for Windows (no Docker)
 REM Run this once to install and initialise Airflow
 REM File: backend/airflow_setup.bat
@@ -13,7 +14,6 @@ set AIRFLOW__CORE__DAGS_FOLDER=%~dp0dags
 set AIRFLOW__CORE__EXECUTOR=LocalExecutor
 set AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:risklake@localhost:5432/risklake
 set AIRFLOW__CORE__LOAD_EXAMPLES=False
-set AIRFLOW__WEBSERVER__SECRET_KEY=risklake-secret-key
 
 echo AIRFLOW_HOME set to: %AIRFLOW_HOME%
 

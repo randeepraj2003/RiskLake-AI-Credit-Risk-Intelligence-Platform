@@ -38,7 +38,7 @@ PG_CONN = {
     "port":     int(os.environ.get("PG_PORT", "5432")),
     "dbname":   os.environ.get("PG_DB",       "risklake"),
     "user":     os.environ.get("PG_USER",     "risklake"),
-    "password": os.environ.get("PG_PASSWORD", "risklake"),
+    "password": os.environ.get("PG_PASSWORD"),
 }
 
 

@@ -26,7 +26,7 @@ BACKEND  = os.environ.get("RISKLAKE_ROOT", r"C:\Users\rande\OneDrive\Desktop\ris
 PYTHON   = sys.executable
 DBT_DIR  = os.path.join(BACKEND, "dbt")
 PG_ENV   = {**os.environ, "PG_HOST":"localhost","PG_PORT":"5432","PG_DB":"risklake",
-             "PG_USER":"postgres","PG_PASSWORD":"risklake","RISKLAKE_ROOT":BACKEND}
+             "PG_USER": os.environ.get("PG_USER"), "PG_PASSWORD": os.environ.get("PG_PASSWORD"), "RISKLAKE_ROOT": BACKEND}
 
 default_args = {
     "owner":            "risklake",
