@@ -2,21 +2,38 @@
 
 > A production-grade \*\*credit risk data lakehouse\*\* built on the \*\*Bronze → Silver → Gold medallion architecture\*\* — combining Apache Airflow, dbt, scikit-learn, SHAP, ChromaDB, and Groq LLM into a complete Data Engineering + ML + AI platform.
 
-[!\[CI](https://github.com/randeepraj2003/risklake/actions/workflows/ci.yml/badge.svg)](https://github.com/randeepraj2003/risklake/actions)
-!\[Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python\&logoColor=white)
-!\[PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql\&logoColor=white)
-!\[dbt](https://img.shields.io/badge/dbt-1.8-FF694B?logo=dbt\&logoColor=white)
-!\[Airflow](https://img.shields.io/badge/Airflow-2.9-017CEE?logo=apacheairflow\&logoColor=white)
-!\[FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?logo=fastapi\&logoColor=white)
-!\[React](https://img.shields.io/badge/React-18-61DAFB?logo=react\&logoColor=black)
+<p align="center">
+
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)
+![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-2.9-017CEE?logo=apacheairflow&logoColor=white)
+![dbt](https://img.shields.io/badge/dbt-1.8-FF694B?logo=dbt&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
+
+</p>
 
 \---
 
-## What is RiskLake?
+#  Overview
 
-RiskLake answers one question every bank needs to answer daily:
+Banks process thousands of loan applications every day and must answer one critical question:
 
-> \*\*"Should we approve this loan — and why?"\*\*
+> **Should this loan be approved, referred, or declined?**
+
+RiskLake simulates a real-world banking credit risk platform by combining:
+
+- Enterprise Data Engineering pipelines
+- Machine Learning credit scoring
+- Explainable AI (SHAP)
+- Regulatory AI Assistant (RAG)
+- Interactive Risk Analytics Dashboard
+- Automated Data Quality Validation
+- Model Governance & Drift Monitoring
+
+The platform ingests raw banking datasets, transforms them through a Medallion Lakehouse, engineers predictive features, trains credit risk models, serves predictions through FastAPI, and provides AI-assisted explanations grounded in banking regulations.
 
 It ingests raw loan application and credit bureau data, transforms it through a three-layer medallion lakehouse, trains an ensemble ML model to predict default probability, and exposes an AI credit analyst that explains decisions in plain English using actual RBI and Basel III policy documents.
 
@@ -167,6 +184,25 @@ dags/
 * **Batch CSV scoring** — upload 500 applications, download scored results
 * **5-page React dashboard** — Portfolio, Customer, AI Analyst, Batch, Model Registry
 * **12 REST endpoints** — FastAPI with Swagger UI and Prometheus metrics
+
+
+
+
+### DevOps
+
+* Docker
+* Docker Compose
+* Git
+* GitHub
+* GitHub Actions
+* CI/CD Pipeline
+* Automated Testing
+* Build Automation
+* Environment Variables
+* Virtual Environments
+* Dependency Management
+* Deployment Ready
+* Containerized Services
 
 \---
 
@@ -330,13 +366,12 @@ Open **http://localhost:5173**
 
 **Randeep Raj K**
 
-
-[!\[GitHub](https://img.shields.io/badge/GitHub-randeepraj2003-181717?logo=github)](https://github.com/randeepraj2003)
-[!\[LinkedIn](https://img.shields.io/badge/LinkedIn-Randeep\_Raj-0A66C2?logo=linkedin)](https://linkedin.com/in/randeep-raj)
-
+- GitHub: https://github.com/randeepraj2003
+- LinkedIn: https://linkedin.com/in/randeep-raj
 \---
 
 ## Licence
 
 MIT
 
+## ⭐ If you found this project interesting, consider giving it a star!
