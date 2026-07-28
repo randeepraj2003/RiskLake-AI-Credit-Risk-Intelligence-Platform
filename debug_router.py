@@ -1,5 +1,6 @@
 ﻿import os
 import sys
+
 sys.path.insert(0, '.')
 os.environ['PG_HOST'] = 'localhost'
 os.environ['PG_DB'] = 'risklake'
