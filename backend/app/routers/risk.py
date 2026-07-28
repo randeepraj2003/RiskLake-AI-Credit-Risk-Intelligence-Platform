@@ -5,13 +5,14 @@ RiskLake - Complete risk.py with ALL endpoints including:
 - NEW: /monitoring, /monitoring/latest
 File: backend/app/routers/risk.py
 """
-import psycopg2
-import os
 import csv
 import io
-from fastapi import APIRouter, HTTPException, UploadFile, File
-from fastapi.responses import StreamingResponse
+import os
 from decimal import Decimal
+
+import psycopg2
+from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi.responses import StreamingResponse
 
 from app.services.decision_engine import make_decision
 

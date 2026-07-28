@@ -14,7 +14,6 @@ Output:
     data/raw/macro_indicators.csv    (~  365 rows, last 12 months daily)
 """
 
-import random
 from datetime import date, timedelta
 from pathlib import Path
 

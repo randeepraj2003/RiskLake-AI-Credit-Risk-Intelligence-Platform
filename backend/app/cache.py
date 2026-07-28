@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 import logging
 import os
-from typing import Any, Optional
+from typing import Any
 
 import redis
 
@@ -48,7 +48,7 @@ except Exception as exc:
     _redis_client = None
 
 
-def cache_get(key: str) -> Optional[Any]:
+def cache_get(key: str) -> Any | None:
     """Return cached value (deserialized from JSON) or None on miss/error."""
     if _redis_client is None:
         return None

@@ -6,15 +6,20 @@ Run: python app/services/train_versioned.py
      python app/services/train_versioned.py --promote
 """
 from __future__ import annotations
-import argparse, json, logging, os, pickle
+
+import argparse
+import json
+import logging
+import os
+import pickle
 from datetime import datetime
 from pathlib import Path
+
 import pandas as pd
 import psycopg2
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score, average_precision_score
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import average_precision_score, roc_auc_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 

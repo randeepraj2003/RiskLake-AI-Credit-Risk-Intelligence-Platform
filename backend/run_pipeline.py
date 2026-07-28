@@ -2,7 +2,10 @@
 RiskLake - Manual Pipeline Runner v2
 Run: python run_pipeline.py
 """
-import subprocess, sys, os, logging
+import logging
+import os
+import subprocess
+import sys
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
@@ -30,10 +33,10 @@ def run(name, cmd, cwd=None):
 
 def bronze_ingest():
     log.info("STEP: 2. Bronze ingest")
+
     import pandas as pd
     import psycopg2
     from psycopg2.extras import execute_values
-    import io
 
     conn = psycopg2.connect(
         host="localhost", dbname="risklake",

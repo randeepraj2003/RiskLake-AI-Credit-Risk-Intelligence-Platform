@@ -44,6 +44,7 @@ from datetime import datetime
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -54,11 +55,11 @@ from psycopg2.extras import execute_values
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
-    classification_report,
-    roc_auc_score,
     RocCurveDisplay,
-    precision_recall_curve,
     average_precision_score,
+    classification_report,
+    precision_recall_curve,
+    roc_auc_score,
 )
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.pipeline import Pipeline

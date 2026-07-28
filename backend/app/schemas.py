@@ -8,8 +8,8 @@ for self-contained readability.
 """
 
 from __future__ import annotations
-from typing import Optional
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 
 
 class HealthResponse(BaseModel):
@@ -20,5 +20,5 @@ class HealthResponse(BaseModel):
 
 class ErrorResponse(BaseModel):
     detail:        str
-    error_code:    Optional[str] = None
-    application_id: Optional[str] = None
+    error_code:    str | None = None
+    application_id: str | None = None

@@ -19,13 +19,17 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "rag"))
-from app.services.query_engine import query, explain_application, _get_collection, CreditAnalystResponse
+from app.services.query_engine import (
+    CreditAnalystResponse,
+    _get_collection,
+    explain_application,
+    query,
+)
 
 router = APIRouter(prefix="/analyst", tags=["AI Credit Analyst"])
 
@@ -34,7 +38,7 @@ router = APIRouter(prefix="/analyst", tags=["AI Credit Analyst"])
 
 class AskRequest(BaseModel):
     question:       str
-    application_id: Optional[str] = None
+    application_id: str | None = None
     top_k:          int           = 5
 
 
@@ -49,9 +53,9 @@ class AskResponse(BaseModel):
     question:       str
     answer:         str
     sources:        list[SourceOut]
-    application_id: Optional[str]
-    pd_context:     Optional[dict]
-    shap_context:   Optional[dict]
+    application_id: str | None
+    pd_context:     dict | None
+    shap_context:   dict | None
     retrieval_ms:   float
     generation_ms:  float
     tokens_used:    int
@@ -83,7 +87,7 @@ async def ask(req: AskRequest) -> AskResponse:
     try:
         result = query(req.question, application_id=req.application_id, top_k=req.top_k)
         return _to_response(result)
-    except EnvironmentError as e:
+    except OSError as e:
         raise HTTPException(status_code=503, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Analyst error: {e}")

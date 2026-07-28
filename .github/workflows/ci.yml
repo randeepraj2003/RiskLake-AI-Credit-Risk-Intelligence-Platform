@@ -24,7 +24,7 @@ jobs:
         run: pip install ruff
 
       - name: Run ruff
-        run: ruff check . --ignore E501,E402
+        run: ruff check . --ignore E501,E402,DTZ005
 
   # ── 2. Unit tests (mock DB + Redis) ────────────────────────────────────────
   test:

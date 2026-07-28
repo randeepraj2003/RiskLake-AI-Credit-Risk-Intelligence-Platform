@@ -20,8 +20,8 @@ import logging
 import os
 import re
 import sys
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 import chromadb
 from chromadb.config import Settings

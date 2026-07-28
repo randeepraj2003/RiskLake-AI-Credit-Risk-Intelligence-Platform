@@ -14,8 +14,11 @@ Steps:
   6. drift_detection     — computes KS drift vs baseline
 """
 
+import logging
+import os
+import subprocess
+import sys
 from datetime import datetime, timedelta
-import subprocess, sys, os, logging
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -56,7 +59,7 @@ def task_generate_data(**ctx):
     run_script(os.path.join(BACKEND, "generate_mock_data.py"))
 
 def task_bronze_ingest(**ctx):
-    import psycopg2, pandas as pd
+    import pandas as pd
     from sqlalchemy import create_engine
     engine = create_engine("postgresql://postgres:risklake@localhost:5432/risklake")
     for tbl in ["loan_applications","credit_bureau","transactions","macro_indicators"]:

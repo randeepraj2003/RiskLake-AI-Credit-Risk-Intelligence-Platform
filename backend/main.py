@@ -1,6 +1,9 @@
-﻿from fastapi import FastAPI
+﻿import os
+import sys
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import sys, os
+
 sys.path.insert(0, os.path.dirname(__file__))
 
 app = FastAPI(
@@ -17,7 +20,8 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-from app.routers import risk, analyst
+from app.routers import analyst, risk
+
 app.include_router(risk.router, prefix='/api')
 app.include_router(analyst.router, prefix='/api')
 

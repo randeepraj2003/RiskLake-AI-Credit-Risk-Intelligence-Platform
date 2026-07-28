@@ -35,7 +35,6 @@ from pathlib import Path
 
 import pandas as pd
 import psycopg2
-from psycopg2.extras import execute_values
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago

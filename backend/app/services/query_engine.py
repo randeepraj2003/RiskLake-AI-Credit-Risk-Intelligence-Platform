@@ -9,14 +9,13 @@ from __future__ import annotations
 
 import logging
 import os
-import sys
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import chromadb
-from groq import Groq
 from chromadb.config import Settings
+from groq import Groq
 from sentence_transformers import SentenceTransformer
 
 PROJECT_ROOT    = Path(os.environ.get("RISKLAKE_ROOT", Path(__file__).resolve().parents[1]))
@@ -152,7 +151,7 @@ Rules:
 
 def generate(prompt: str, stream: bool = False) -> tuple[str, int]:
     if not GROQ_API_KEY:
-        raise EnvironmentError("GROQ_API_KEY not set. export GROQ_API_KEY=your_key")
+        raise OSError("GROQ_API_KEY not set. export GROQ_API_KEY=your_key")
     client = Groq(api_key=GROQ_API_KEY)
     response = client.chat.completions.create(
         model=GROQ_MODEL,

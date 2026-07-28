@@ -1,4 +1,5 @@
 ﻿import psycopg2
+
 conn = psycopg2.connect(host='localhost',dbname='risklake',user='postgres',password='risklake')
 cur = conn.cursor()
 cur.execute("UPDATE gold.model_registry SET status='retired' WHERE status='active'")

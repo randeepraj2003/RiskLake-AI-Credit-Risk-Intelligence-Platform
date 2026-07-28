@@ -8,11 +8,13 @@ Computes KS test between current PD distribution and training baseline.
 Saves results to gold.model_monitoring table.
 """
 from __future__ import annotations
-import json, logging, os
+
+import json
+import logging
+import os
 from datetime import datetime
-from pathlib import Path
+
 import numpy as np
-import pandas as pd
 import psycopg2
 from scipy import stats
 

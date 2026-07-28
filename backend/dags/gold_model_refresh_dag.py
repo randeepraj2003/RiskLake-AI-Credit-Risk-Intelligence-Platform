@@ -19,7 +19,7 @@ import json
 import logging
 import os
 import subprocess
-from datetime import datetime, timedelta
+from datetime import timedelta
 from pathlib import Path
 
 import psycopg2
